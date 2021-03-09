@@ -1,4 +1,4 @@
-export default function PopupWithForm(props) {
+    export default function PopupWithForm(props) {
 
     return (
         <section className={props.isOpen ? `popup popup_type_${props.name} popup_opened` : `popup popup_type_${props.name}`}>

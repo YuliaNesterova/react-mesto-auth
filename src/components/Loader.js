@@ -1,3 +1,4 @@
+import React from "react";
 import loader from '../images/ring.svg'
 
 export default function Loader(props) {

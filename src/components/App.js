@@ -12,6 +12,9 @@ import CardDeletePopup from "./CardDeletePopup";
 import Loader from "./Loader";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import Login from "./Login";
+import Register from "./Register";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -24,6 +27,7 @@ function App() {
     const [isSaving, setIsSaving] = React.useState(false);
     const [isErrorPopupOpen, setIsErrorPopupOpen] = React.useState(false);
     const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = React.useState(false);
+    const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
     const [currentCard, setCurrentCard] = React.useState('');
     const [isDeleting, setIsDeleting] = React.useState(false);
 
@@ -103,7 +107,8 @@ function App() {
         setIsAddPlacePopupOpen(false);
         setSelectedCard(false);
         setIsErrorPopupOpen(false);
-        setIsCardDeletePopupOpen(false)
+        setIsCardDeletePopupOpen(false);
+        setIsInfoTooltipOpen(false);
     }
 
    function handleUpdateUser(object) {
@@ -157,8 +162,12 @@ function App() {
 
           <div className="page">
               <Header />
-              <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onDelete={handleDeleteCardPopup}/>
+              <Login />
+              <Register />
+              <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups}/>
+              {/*<Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}*/}
+              {/*      onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onDelete={handleDeleteCardPopup}/>*/}
+
               <Footer />
               <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isSaving={isSaving}/>
               <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isSaving={isSaving}/>
@@ -167,6 +176,8 @@ function App() {
               <ImagePopup name={`image`} card={selectedCard} onClose={closeAllPopups} />
 
               <ErrorPopup isOpen={isErrorPopupOpen} onClose={closeAllPopups} />
+
+
               <Loader isLoading={pageLoader}/>
           </div>
 

@@ -1,3 +1,4 @@
+import React from "react";
 import logo from "../images/header__logo.svg";
 
 export default function Header() {
