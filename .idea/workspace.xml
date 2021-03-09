@@ -25,7 +25,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59e90ac1-a2c6-4e61-addd-cc73688afc32" name="Default Changelist" comment="" />
+    <list default="true" id="59e90ac1-a2c6-4e61-addd-cc73688afc32" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +50,11 @@
     <property name="settings.editor.selected.configurable" value="reference.idesettings.emmet.xml" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -58,6 +65,7 @@
       <updated>1615308753245</updated>
       <workItem from="1615308754441" duration="660000" />
       <workItem from="1615309443577" duration="626000" />
+      <workItem from="1615310088579" duration="1638000" />
     </task>
     <servers />
   </component>
@@ -87,5 +95,23 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1378" height="250" key="GridCell.Tab.0.bottom" timestamp="1615311320273">
+      <screen x="0" y="25" width="1680" height="943" />
+    </state>
+    <state width="1378" height="250" key="GridCell.Tab.0.bottom/0.25.1680.943@0.25.1680.943" timestamp="1615311320273" />
+    <state width="1378" height="250" key="GridCell.Tab.0.center" timestamp="1615311320272">
+      <screen x="0" y="25" width="1680" height="943" />
+    </state>
+    <state width="1378" height="250" key="GridCell.Tab.0.center/0.25.1680.943@0.25.1680.943" timestamp="1615311320272" />
+    <state width="1378" height="250" key="GridCell.Tab.0.left" timestamp="1615311320272">
+      <screen x="0" y="25" width="1680" height="943" />
+    </state>
+    <state width="1378" height="250" key="GridCell.Tab.0.left/0.25.1680.943@0.25.1680.943" timestamp="1615311320272" />
+    <state width="1378" height="250" key="GridCell.Tab.0.right" timestamp="1615311320273">
+      <screen x="0" y="25" width="1680" height="943" />
+    </state>
+    <state width="1378" height="250" key="GridCell.Tab.0.right/0.25.1680.943@0.25.1680.943" timestamp="1615311320273" />
   </component>
 </project>
