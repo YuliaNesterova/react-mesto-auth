@@ -3,6 +3,9 @@
   margin: auto;
   padding-top: 45px;
   border-bottom: 1px solid 	rgba(128,128,128, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 @media (max-width: 950px) {

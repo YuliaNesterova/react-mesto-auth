@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
 
@@ -11,7 +12,7 @@ export default function Register() {
                     <input type="text" className="data__input data__input_type_register" name="password" placeholder="Пароль" id="password-input"/>
                     <button type="submit" className="data__button data__button_type_register">Зарегистрироваться</button>
                 </form>
-                <h3 className="data__subtitle">Уже зарегистрированы? <a className="data__link" href="">Войти</a></h3>
+                <h3 className="data__subtitle">Уже зарегистрированы? <Link className="data__link"  to="/sign-in">Войти</Link></h3>
             </div>
         </section>
     )

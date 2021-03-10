@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from './Header.js'
 import Main from "./Main.js";
@@ -15,6 +16,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Login from "./Login";
 import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -158,15 +160,25 @@ function App() {
     }
 
   return (
+      <BrowserRouter>
       <CurrentUserContext.Provider value={currentUser}>
 
           <div className="page">
-              <Header />
-              <Login />
-              <Register />
+              <Header loggedIn={true} isLoginActive={true}/>
+              <ProtectedRoute path="/main" loggedIn={true} component={Main} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
+                              onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}
+                              onDelete={handleDeleteCardPopup}/>
+              <Route exact path="/sign-in">
+                  <Login />
+              </Route>
+              <Route exact path="/sign-up">
+                  <Register />
+              </Route>
+
               <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups}/>
               {/*<Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}*/}
-              {/*      onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onDelete={handleDeleteCardPopup}/>*/}
+              {/*      onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}*/}
+              {/*      onDelete={handleDeleteCardPopup}/>*/}
 
               <Footer />
               <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isSaving={isSaving}/>
@@ -182,6 +194,7 @@ function App() {
           </div>
 
       </CurrentUserContext.Provider>
+      </BrowserRouter>
       );
 }
 
