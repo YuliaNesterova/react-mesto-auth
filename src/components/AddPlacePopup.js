@@ -6,6 +6,7 @@ export default function AddPlacePopup(props) {
     const [description, setDescription] = React.useState('');
 
     function handleImageChange(e) {
+        console.log(image)
         setImage(e.target.value);
     }
 

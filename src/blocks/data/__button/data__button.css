@@ -11,4 +11,14 @@
     line-height: 22px;
     text-align: center;
     color: #000000;
+    transition: opacity 0.3s, transform 0.2s linear, background-color 0.3s ease-in-out;
+}
+
+.data__button:hover {
+    opacity: 0.85;
+    cursor: url("../../../images/cursor.png"), auto;
+}
+
+.data__button:active {
+    transform: scale(0.95);
 }
