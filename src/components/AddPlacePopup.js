@@ -32,7 +32,7 @@ export default function AddPlacePopup(props) {
     }, [props.isOpen]);
 
     return (
-        <PopupWithForm  isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} name={`add`} title={`Новое место`} isSaving={props.isSaving}>
+        <PopupWithForm  isOpen={props.isOpen} save={true} onClose={props.onClose} onSubmit={handleSubmit} name={`add`} title={`Новое место`} isSaving={props.isSaving}>
             <fieldset className="popup__field">
                 <input type="text" name="description" className="popup__input popup__input_type_description"
                        id="description-input"

@@ -22,7 +22,7 @@ export default function EditAvatarPopup(props) {
     }, [props.isOpen]);
 
     return (
-        <PopupWithForm isOpen={props.isOpen} onClose={props.onClose} name={`edit-pic`} title={`Обновить аватар`} isSaving={props.isSaving}
+        <PopupWithForm isOpen={props.isOpen} save={true} onClose={props.onClose} name={`edit-pic`} title={`Обновить аватар`} isSaving={props.isSaving}
                        onSubmit={handleSubmit}>
             <fieldset className="popup__field">
                 <input type="url" name="user_pic" className="popup__input popup__input_type_link"

@@ -13,19 +13,6 @@ export function register (password, email) {
         })
     })
         .then((res) => res.json())
-        // .then((response) => {
-        //     try {
-        //         if (response.status === 200){
-        //             return response.json();
-        //         }
-        //     } catch(e){
-        //         return (e)
-        //     }
-        // })
-        // .then((res) => {
-        //     return res;
-        // })
-        .catch((err) => console.log(err));
 }
 
 export function authorize (password, email) {
@@ -47,8 +34,7 @@ export function authorize (password, email) {
                 return data;
             }
         })
-        .catch(err => console.log(err))
-};
+}
 
 export function getUserData(token) {
     return fetch(`${BASE_URL}/users/me`, {

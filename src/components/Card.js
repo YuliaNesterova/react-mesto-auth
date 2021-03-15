@@ -14,6 +14,8 @@ export default function Card(props) {
 
     const cardLikeButtonClassName = `${isLiked ? 'element__like-button element__like-button_clicked' : 'element__like-button'}`;
 
+    const [isShown, setIsShown] = React.useState(false);
+
     function handleClick() {
         props.onCardClick(props.card);
     }
@@ -27,16 +29,16 @@ export default function Card(props) {
     }
 
     function handleAuthorShow(e) {
-       e.target.previousSibling.classList.add("element__author_shown");
+        setIsShown(true);
     }
 
     function handleAuthorHide(e) {
-        e.target.previousSibling.classList.remove("element__author_shown");
+        setIsShown(false);
     }
 
     return(
-        <li className="element" key={props.card._id}>
-            <span className="element__author">{props.card.owner.name}</span>
+        <li className="element">
+            <span className={`element__author ${isShown ? `element__author_shown` : ''}`}>{props.card.owner.name}</span>
             <img src={props.card.owner.avatar} alt={props.card.owner.name} className="element__card-author"
                  onMouseEnter={handleAuthorShow} onMouseLeave={handleAuthorHide}/>
             <img src={props.card.link} alt={props.card.name} className="element__image" onClick={handleClick}/>

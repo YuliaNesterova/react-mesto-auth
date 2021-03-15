@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, withRouter, useHistory} from 'react-router-dom';
-import * as auth from '../auth';
+import * as auth from '../utils/auth';
 
 function Register(props) {
     const [email, setEmail] = React.useState('');
@@ -15,21 +15,18 @@ function Register(props) {
         setPassword(e.target.value)
     }
 
-    function handleSubmit(e){
-        e.preventDefault()
+    function handleSubmit(e) {
+        e.preventDefault();
 
-        auth.register(password, email)
-            .then((res) => {
-                if(res.data) {
-                    setEmail('');
-                    setPassword('');
-                    history.push('/sign-in');
-                    props.onRegister(true);
-                } else {
-                    props.onRegister(false);
-                }
-            })
+        props.onRegister(password, email);
     }
+
+    React.useEffect(() => {
+        if(props.isRegisterSuccess) {
+            setEmail('');
+            setPassword('');
+        }
+    }, [props.isRegisterSuccess])
 
     return (
         <section className="data data_type_register">
