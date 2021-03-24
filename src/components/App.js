@@ -26,7 +26,7 @@ function App() {
     const [selectedCard, setSelectedCard] = React.useState(false);
     const [cards, setCards] = React.useState([]);
     const [currentUser, setCurrentUser] = React.useState({});
-    const [pageLoader, setPageLoader] = React.useState(true);
+    const [pageLoader, setPageLoader] = React.useState(false);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isErrorPopupOpen, setIsErrorPopupOpen] = React.useState(false);
     const [isCardDeletePopupOpen, setIsCardDeletePopupOpen] = React.useState(false);
@@ -37,47 +37,54 @@ function App() {
     const [loggedIn, setLoggedIn] = React.useState(false);
     const [isLoginPageActive, setIsLoginPageActive] = React.useState(true);
     const [userEmail, setUserEmail] = React.useState('');
+    const [token, setToken] = React.useState('');
 
     const history = useHistory();
 
-    React.useEffect(() => {
-       Promise.all([api.getUserInfo(), api.getInitialCards()])
-           .then(([userInfo, cards]) => {
-               setCurrentUser(userInfo);
-               setCards(cards);
-           })
-           .catch((res) =>  {
-               setIsErrorPopupOpen(true);
-           })
-           .finally(() => {
-               setPageLoader(false)
-           });
-    }, [])
+    function handleLogin(password, email) {
+        auth.authorize(password, email)
+            .then((data) => {
+                if(data.token) {
+                    setLoggedIn(true)
+                    history.push('/main');
+                }
+            })
+            .catch(() => {
+                setIsInfoTooltipOpen(true)
+            })
+    }
 
     React.useEffect(() => {
         function checkToken() {
+
             if(localStorage.getItem('token')) {
                 const token = localStorage.getItem('token');
 
+                setPageLoader(true);
+
                 if(token) {
-                    auth.getUserData(token)
-                        .then((res) => {
-                            if(res.data) {
-                                setUserEmail(res.data.email);
+                    Promise.all([auth.getUserData(token), api.getUserInfo(token), api.getInitialCards(token)])
+                        .then(([userData, userInfo, cards]) => {
+                                setUserEmail(userData.email);
                                 setLoggedIn(true);
+                                setToken(localStorage.getItem('token'));
                                 history.push('/main');
-                            }
+                                setCurrentUser(userInfo)
+                                setCards(cards)
                         })
-                        .catch((err) => {
-                            console.log(err);
+                        .catch(() => {
+                            setIsErrorPopupOpen(true);
                             }
                         )
+                        .finally(() => {
+                            setPageLoader(false);
+                        })
                 }
             }
         }
         checkToken();
 
-    }, [history, loggedIn])
+    }, [history, loggedIn, token])
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
@@ -99,25 +106,25 @@ function App() {
     }
 
     function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(i => i === currentUser._id);
 
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        api.changeLikeCardStatus(card._id, !isLiked, token).then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
             .catch((res) =>  {
-                console.log(`Ошибка ${res.status}, попробуйте еще раз`);
+                console.log(`Ошибка ${res}, попробуйте еще раз`);
             });
     }
 
     function handleCardDelete(card) {
        setIsDeleting(true);
 
-           api.deleteCard(card._id).then(() => {
+           api.deleteCard(card._id, token).then(() => {
                const newCards = cards.filter((item) => {return item._id !== card._id})
                setCards(newCards);
            })
                .catch((res) =>  {
-                   console.log(`Ошибка ${res.status}, попробуйте еще раз`);
+                   console.log(`Ошибка ${res}, попробуйте еще раз`);
                })
                .finally(() => {
                    setIsCardDeletePopupOpen(false);
@@ -147,11 +154,11 @@ function App() {
    function handleUpdateUser(object) {
        setIsSaving(true);
 
-       api.changeUserInfo(object).then((user) => {
+       api.changeUserInfo(object, token).then((user) => {
            setCurrentUser(user);
        })
            .catch((res) =>  {
-               console.log(`Ошибка ${res.status}, попробуйте еще раз`);
+               console.log(`Ошибка ${res}, попробуйте еще раз`);
            })
            .finally(() => {
                setIsEditProfilePopupOpen(false);
@@ -162,11 +169,11 @@ function App() {
     function handleUpdateAvatar(object) {
        setIsSaving(true);
 
-       api.getNewUserPic(object).then((avatar) => {
+       api.getNewUserPic(object, token).then((avatar) => {
            setCurrentUser(avatar);
        })
            .catch((res) =>  {
-               console.log(`Ошибка ${res.status}, попробуйте еще раз`);
+               console.log(`Ошибка ${res}, попробуйте еще раз`);
            })
            .finally(() => {
                setIsEditAvatarPopupOpen(false);
@@ -177,12 +184,12 @@ function App() {
     function handleAddPlace(object) {
         setIsSaving(true);
 
-        api.addNewCard(object).then((newCard) => {
+        api.addNewCard(object, token).then((newCard) => {
             setCards([newCard, ...cards]);
 
         })
             .catch((res) =>  {
-                console.log(`Ошибка ${res.status}, попробуйте еще раз`);
+                console.log(`Ошибка ${res}, попробуйте еще раз`);
             })
             .finally(() => {
                 setIsAddPlacePopupOpen(false);
@@ -190,19 +197,6 @@ function App() {
             });
     }
 
-    function handleLogin(password, email) {
-        auth.authorize(password, email)
-            .then((data) => {
-                if(data.token) {
-                    setLoggedIn(true)
-                    history.push('/main');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                setIsInfoTooltipOpen(true)
-            })
-    }
 
     function handleSignOut() {
        setLoggedIn(false);
@@ -220,7 +214,7 @@ function App() {
     function handleRegister(password, email) {
         auth.register(password, email)
             .then((res) => {
-                if(res.data) {
+                if(res) {
                     setIsRegisterSuccess(true);
                     setIsInfoTooltipOpen(true);
                     setIsLoginPageActive(true);

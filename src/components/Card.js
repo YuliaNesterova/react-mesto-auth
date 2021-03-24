@@ -5,8 +5,8 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 export default function Card(props) {
     const currentUser = React.useContext(CurrentUserContext);
 
-    const isOwn = props.card.owner._id === currentUser._id;
-    const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+    const isOwn = props.card.owner === currentUser._id;
+    const isLiked = props.card.likes.some(i => i === currentUser._id);
 
     const cardDeleteButtonClassName = (
         `${isOwn ? 'element__delete-button' : 'element__delete-button element__delete-button_hidden'}`
@@ -14,7 +14,6 @@ export default function Card(props) {
 
     const cardLikeButtonClassName = `${isLiked ? 'element__like-button element__like-button_clicked' : 'element__like-button'}`;
 
-    const [isShown, setIsShown] = React.useState(false);
 
     function handleClick() {
         props.onCardClick(props.card);
@@ -28,19 +27,8 @@ export default function Card(props) {
         props.onDelete(props.card);
     }
 
-    function handleAuthorShow(e) {
-        setIsShown(true);
-    }
-
-    function handleAuthorHide(e) {
-        setIsShown(false);
-    }
-
     return(
         <li className="element">
-            <span className={`element__author ${isShown ? `element__author_shown` : ''}`}>{props.card.owner.name}</span>
-            <img src={props.card.owner.avatar} alt={props.card.owner.name} className="element__card-author"
-                 onMouseEnter={handleAuthorShow} onMouseLeave={handleAuthorHide}/>
             <img src={props.card.link} alt={props.card.name} className="element__image" onClick={handleClick}/>
             <button className={cardDeleteButtonClassName} onClick={handleDeleteClick}></button>
             <div className="element__description">

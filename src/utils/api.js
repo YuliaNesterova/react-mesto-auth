@@ -12,29 +12,29 @@ class Api {
         return res.json();
     }
 
-    getInitialCards() {
+    getInitialCards(token) {
            return fetch(`${this._baseUrl}/cards`, {
                 headers: {
-                    authorization: `${this._authorization}`
+                    authorization: `Bearer ${token}`
                 }
             })
                .then((res) => this._getResponseData(res));
         }
 
-    getUserInfo() {
+    getUserInfo(token) {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: {
-                authorization: `${this._authorization}`
+                authorization: `Bearer ${token}`
             }
         })
             .then((res) => this._getResponseData(res));
     }
 
-    changeUserInfo(object) {
+    changeUserInfo(object, token) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
-                authorization: `${this._authorization}`,
+                authorization: `Bearer ${token}`,
                 'Content-Type': this._contentType
             },
             body: JSON.stringify({
@@ -45,11 +45,11 @@ class Api {
             .then((res) => this._getResponseData(res));
     }
 
-    addNewCard(object) {
+    addNewCard(object, token) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: {
-                authorization: `${this._authorization}`,
+                authorization: `Bearer ${token}`,
                 'Content-Type': this._contentType
             },
             body: JSON.stringify({
@@ -60,22 +60,22 @@ class Api {
             .then((res) => this._getResponseData(res));
     }
 
-    deleteCard(id) {
+    deleteCard(id, token) {
         return fetch(`${this._baseUrl}/cards/${id}`, {
             method: "DELETE",
             headers: {
-                authorization: `${this._authorization}`,
+                authorization: `Bearer ${token}`,
                 'Content-Type': this._contentType
             },
         })
             .then((res) => this._getResponseData(res));
     }
 
-    getNewUserPic(object) {
+    getNewUserPic(object, token) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
-                authorization: `${this._authorization}`,
+                authorization: `Bearer ${token}`,
                 'Content-Type': this._contentType
             },
             body: JSON.stringify({
@@ -85,21 +85,21 @@ class Api {
             .then((res) => this._getResponseData(res));
     }
 
-    changeLikeCardStatus(id, isLiked) {
+    changeLikeCardStatus(id, isLiked, token) {
         if(isLiked) {
-            return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'PUT',
                 headers: {
-                    authorization: `${this._authorization}`,
+                    authorization: `Bearer ${token}`,
                     'Content-Type': this._contentType
                 }
             })
                 .then((res) => this._getResponseData(res));
         } else {
-            return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'DELETE',
                 headers: {
-                    authorization: `${this._authorization}`,
+                    authorization: `Bearer ${token}`,
                     'Content-Type': this._contentType
                 }
             })
@@ -108,7 +108,6 @@ class Api {
     }
     }
 
-    const api = new Api({baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-18',
-        authorization: '04df758b-41ec-45dd-81f7-1b0f03936357', contentType: 'application/json'})
+    const api = new Api({baseUrl: 'http://localhost:3000', contentType: 'application/json'})
 
 export default api;
