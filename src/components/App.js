@@ -1,5 +1,5 @@
 import React from "react";
-import {Router, Route, withRouter, useHistory, Switch } from "react-router-dom";
+import {Router, Route, withRouter, useHistory, Switch, Redirect } from "react-router-dom";
 import * as auth from '../utils/auth';
 
 import Header from './Header.js'
@@ -257,6 +257,9 @@ function App() {
               </Route>
               <Route exact path="/sign-up">
                   <Register handleLoginActive={handleLoginActive} onRegister={handleRegister} isRegisterSuccess={isRegisterSuccess}/>
+              </Route>
+              <Route exact path="/">
+                  {loggedIn ? <Redirect to="/main"/> : <Redirect to="/sign-in" />}
               </Route>
               </Switch>
 
