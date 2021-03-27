@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.90137262.chunk.css",
+    "main.js": "/static/js/main.3288af90.chunk.js",
+    "main.js.map": "/static/js/main.3288af90.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b25a30fd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b25a30fd.js.map",
+    "static/js/2.b7044062.chunk.js": "/static/js/2.b7044062.chunk.js",
+    "static/js/2.b7044062.chunk.js.map": "/static/js/2.b7044062.chunk.js.map",
+    "static/js/3.fb5fdaa4.chunk.js": "/static/js/3.fb5fdaa4.chunk.js",
+    "static/js/3.fb5fdaa4.chunk.js.map": "/static/js/3.fb5fdaa4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.90137262.chunk.css.map": "/static/css/main.90137262.chunk.css.map",
+    "static/js/2.b7044062.chunk.js.LICENSE.txt": "/static/js/2.b7044062.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/likeButtonClicked.75438e94.svg",
+    "static/media/error.9a236596.jpg": "/static/media/error.9a236596.jpg",
+    "static/media/fail.df8eddf6.svg": "/static/media/fail.df8eddf6.svg",
+    "static/media/header__logo.ff16f24b.svg": "/static/media/header__logo.ff16f24b.svg",
+    "static/media/ring.8f5826bb.svg": "/static/media/ring.8f5826bb.svg",
+    "static/media/success.1b6082f8.svg": "/static/media/success.1b6082f8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b25a30fd.js",
+    "static/js/2.b7044062.chunk.js",
+    "static/css/main.90137262.chunk.css",
+    "static/js/main.3288af90.chunk.js"
+  ]
+}
